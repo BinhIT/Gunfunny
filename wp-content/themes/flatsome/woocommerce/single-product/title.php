@@ -11,8 +11,8 @@
  * the readme will list any important changes.
  *
  * @see     https://docs.woocommerce.com/document/template-structure/
- * @package WooCommerce\Templates
- * @version 4.4.0
+ * @package    WooCommerce/Templates
+ * @version    1.6.4
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

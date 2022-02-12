@@ -174,7 +174,7 @@ if ( ! function_exists( 'of_options' ) ) {
 			'type' => 'checkbox',
 			'id'   => 'jquery_migrate',
 			'std'  => 0,
-			'desc' => 'Remove jQuery Migrate. Most up-to-date front-end code and plugins don’t require jquery-migrate.min.js. More often than not, keeping this - simply adds unnecessary load to your site. (for < WP 5.5)',
+			'desc' => 'Remove jQuery Migrate. Most up-to-date front-end code and plugins don’t require jquery-migrate.min.js. More often than not, keeping this - simply adds unnecessary load to your site.',
 		);
 
 		$of_options[] = array(
@@ -231,6 +231,21 @@ if ( ! function_exists( 'of_options' ) ) {
 			'desc' => 'Change the search field placeholder.',
 			'id'   => 'search_placeholder',
 			'type' => 'text',
+		);
+
+		$of_options[] = array(
+			'name'    => 'Search results latency',
+			'desc'    => 'Set the delay for live search results.',
+			'id'      => 'search_result_latency',
+			'std'     => '0',
+			'type'    => 'select',
+			'options' => array(
+					'0'    => 'Instant',
+					'500'  => '500 ms',
+					'1000' => '1000 ms',
+					'1500' => '1500 ms',
+					'2000' => '2000 ms',
+				),
 		);
 
 		if ( is_woocommerce_activated() ) {
@@ -370,6 +385,14 @@ if ( ! function_exists( 'of_options' ) ) {
 			);
 
 			$of_options[] = array(
+				'name' => 'Variation swatches',
+				'id'   => 'swatches',
+				'desc' => 'Enable variation swatches.',
+				'std'  => 0,
+				'type' => 'checkbox',
+			);
+
+			$of_options[] = array(
 				'name' => 'Disable Reviews Global',
 				'id'   => 'disable_reviews',
 				'desc' => 'Disable reviews globally.',
@@ -449,6 +472,14 @@ if ( ! function_exists( 'of_options' ) ) {
 				'name' => 'Disable prices',
 				'id'   => 'catalog_mode_prices',
 				'desc' => 'Select to disable prices on category pages and product page.',
+				'std'  => 0,
+				'type' => 'checkbox',
+			);
+
+			$of_options[] = array(
+				'name' => 'Remove sale badge',
+				'id'   => 'catalog_mode_sale_badge',
+				'desc' => 'Select to remove sale badges.',
 				'std'  => 0,
 				'type' => 'checkbox',
 			);
@@ -572,7 +603,7 @@ if ( ! function_exists( 'of_options' ) ) {
 		}
 
 		// Yoast options.
-		if ( class_exists( 'WPSEO_Frontend' ) ) {
+		if ( class_exists( 'WPSEO_Options' ) ) {
 			$of_options[] = array(
 				'name' => 'Yoast Primary Category',
 				'id'   => 'wpseo_primary_term',

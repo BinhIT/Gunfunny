@@ -30,7 +30,10 @@ function ux_list_products( $args ) {
 		$tags = '';
 		if ( isset( $options['tags'] ) ) {
 			if ( is_numeric( $options['tags'] ) ) {
-				$options['tags'] = get_term( $options['tags'] )->slug;
+				$term = get_term( $options['tags'] );
+				if ( $term instanceof WP_Term ) {
+					$options['tags'] = $term->slug;
+				}
 			}
 			$tags = $options['tags'];
 		}

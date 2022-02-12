@@ -18,7 +18,7 @@
 	<div id="main" class="page-wrapper box-shadow page-checkout" style="padding:15px 30px 15px;">
 
 		<div class="focused-checkout-logo text-center" style="padding-top: 30px; padding-bottom: 30px;">
-			<?php get_template_part( 'template-parts/header/partials/element', 'logo' ); ?>
+			<div id="logo" class="logo"><?php get_template_part( 'template-parts/header/partials/element', 'logo' ); ?></div>
 		</div>
 
 		<div class="container">

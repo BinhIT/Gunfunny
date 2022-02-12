@@ -652,4 +652,4 @@ if(!class_exists('WC_Product_Data_Fields')){
  * Instantiate Class
  */
 
-$wc_cpdf = new WC_Product_Data_Fields();
+$GLOBALS['wc_cpdf'] = new WC_Product_Data_Fields();

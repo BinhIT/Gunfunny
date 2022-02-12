@@ -1,6 +1,6 @@
 <?php
 // [blog_posts]
-function shortcode_latest_from_blog($atts, $content = null, $tag) {
+function shortcode_latest_from_blog($atts, $content = null, $tag = '' ) {
 
 	extract(shortcode_atts(array(
 		"_id" => 'row-'.rand(),
@@ -156,6 +156,7 @@ function shortcode_latest_from_blog($atts, $content = null, $tag) {
 	$repeater['slider_nav_color'] = $slider_nav_color;
 	$repeater['slider_bullets'] = $slider_bullets;
     $repeater['auto_slide'] = $auto_slide;
+	$repeater['infinitive'] = $infinitive;
 	$repeater['row_spacing'] = $col_spacing;
 	$repeater['row_width'] = $width;
 	$repeater['columns'] = $columns;
@@ -227,8 +228,7 @@ while ( $recentPosts->have_posts() ) : $recentPosts->the_post();
 	        if($grid[$current]['size'] == 'thumbnail') $show_excerpt = 'false';
 	    }
 
-		?>
-		<div class="col <?php echo implode(' ', $col_class); ?>" <?php echo $animate;?>>
+		?><div class="col <?php echo implode(' ', $col_class); ?>" <?php echo $animate;?>>
 			<div class="col-inner">
 			<a href="<?php the_permalink() ?>" class="plain">
 				<div class="box <?php echo $classes_box; ?> box-blog-post has-hover">
@@ -306,8 +306,7 @@ while ( $recentPosts->have_posts() ) : $recentPosts->the_post();
 				</div>
 				</a>
 			</div>
-		</div>
-<?php endwhile;
+		</div><?php endwhile;
 wp_reset_query();
 
 // Get repeater end.

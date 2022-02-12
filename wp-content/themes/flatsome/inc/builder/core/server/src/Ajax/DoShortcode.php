@@ -5,6 +5,16 @@ namespace UxBuilder\Ajax;
 class DoShortcode {
 
   public function do_shortcode() {
+    $post_id = isset( $_POST['post_id'] ) ? (int) $_POST['post_id'] : 0;
+    $nonce   = isset( $_POST['security'] ) ? $_POST['security'] : '';
+
+    if ( ! wp_verify_nonce( $nonce, 'ux-builder-' . $post_id ) ) {
+      echo '<div class="uxb-error">';
+      echo __( 'Sorry, an error occurred while rendering this element.', 'flatsome' );
+      echo '</div>';
+      die;
+    }
+
     $shortcode = wp_parse_args( $_POST['ux_builder_shortcode'], array(
       'tag' => '', '$id' => '', 'options' => array()
     ) );
@@ -20,7 +30,7 @@ class DoShortcode {
         $shortcode['children'] = array( array(
             'tag' => 'text',
             'options' => array(),
-            'content' => '<content/>',
+            'content' => '<content></content>',
         ) );
     }
 

@@ -13,6 +13,17 @@ defined( 'ABSPATH' ) || exit;
 
 global $product;
 
+$layout       = flatsome_product_block( get_the_ID() );
+$layout_id    = $layout['id'];
+$layout_scope = $layout['scope'];
+
+$classes = array(
+	'custom-product-page',
+	'ux-layout-' . $layout_id,
+	'ux-layout-scope-' . $layout_scope,
+)
+
+
 ?>
 <div class="container">
 	<?php
@@ -30,17 +41,17 @@ global $product;
 	}
 	?>
 </div>
-<div id="product-<?php the_ID(); ?>" <?php fl_woocommerce_version_check( '3.4.0' ) ? wc_product_class( '', $product ) : post_class(); ?>>
+<div id="product-<?php the_ID(); ?>" <?php wc_product_class( '', $product ); ?>>
 
-	<div class="custom-product-page">
+	<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 
-		<?php echo flatsome_apply_shortcode( 'block', array( 'id' => flatsome_product_block( get_the_ID() )['id'] ) ); ?>
+		<?php echo flatsome_apply_shortcode( 'block', array( 'id' => $layout_id ) ); ?>
 			<div id="product-sidebar" class="mfp-hide">
 				<div class="sidebar-inner">
 					<?php
 					do_action( 'flatsome_before_product_sidebar' );
 					/**
-					 * woocommerce_sidebar hook
+					 * The woocommerce_sidebar hook
 					 *
 					 * @hooked woocommerce_get_sidebar - 10
 					 */

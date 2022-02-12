@@ -6,6 +6,13 @@
  * @package flatsome
  */
 
+if ( ! defined( 'UXTHEMES_API_URL' ) ) {
+  define( 'UXTHEMES_API_URL', 'https://api.uxthemes.com' );
+}
+
+if ( ! defined( 'UXTHEMES_ACCOUNT_URL' ) ) {
+  define( 'UXTHEMES_ACCOUNT_URL', 'https://account.uxthemes.com' );
+}
 
 /**
  * Require Classes
@@ -13,6 +20,13 @@
 require get_template_directory() . '/inc/classes/class-flatsome-default.php';
 require get_template_directory() . '/inc/classes/class-flatsome-options.php';
 require get_template_directory() . '/inc/classes/class-flatsome-upgrade.php';
+require get_template_directory() . '/inc/classes/class-flatsome-base-registration.php';
+require get_template_directory() . '/inc/classes/class-flatsome-wupdates-registration.php';
+require get_template_directory() . '/inc/classes/class-flatsome-registration.php';
+require get_template_directory() . '/inc/classes/class-flatsome-envato.php';
+require get_template_directory() . '/inc/classes/class-flatsome-envato-admin.php';
+require get_template_directory() . '/inc/classes/class-flatsome-envato-registration.php';
+require get_template_directory() . '/inc/classes/class-uxthemes-api.php';
 
 /**
  * Setup.
@@ -21,6 +35,7 @@ require get_template_directory() . '/inc/classes/class-flatsome-upgrade.php';
 require get_template_directory() . '/inc/functions/function-conditionals.php';
 require get_template_directory() . '/inc/functions/function-global.php';
 require get_template_directory() . '/inc/functions/function-upgrade.php';
+require get_template_directory() . '/inc/functions/function-update.php';
 require get_template_directory() . '/inc/functions/function-defaults.php';
 require get_template_directory() . '/inc/functions/function-setup.php';
 require get_template_directory() . '/inc/functions/function-theme-mods.php';
@@ -28,13 +43,9 @@ require get_template_directory() . '/inc/functions/function-plugins.php';
 require get_template_directory() . '/inc/functions/function-custom-css.php';
 require get_template_directory() . '/inc/functions/function-maintenance.php';
 require get_template_directory() . '/inc/functions/function-fallbacks.php';
+require get_template_directory() . '/inc/functions/function-site-health.php';
 require get_template_directory() . '/inc/functions/fl-template-functions.php';
 require get_template_directory() . '/inc/functions/function-fonts.php';
-
-
-if(is_admin_bar_showing() && current_user_can('manage_options')){
-  require get_template_directory() . '/inc/functions/function-update.php';
-}
 
 // Get Presets for Theme Options and Demos
 require get_template_directory() . '/inc/functions/function-presets.php';
@@ -95,9 +106,13 @@ require get_template_directory() . '/inc/shortcodes/testimonials.php';
 require get_template_directory() . '/inc/shortcodes/team_members.php';
 require get_template_directory() . '/inc/shortcodes/messages.php';
 require get_template_directory() . '/inc/shortcodes/search.php';
+require get_template_directory() . '/inc/shortcodes/ux_html.php';
 require get_template_directory() . '/inc/shortcodes/ux_logo.php';
 require get_template_directory() . '/inc/shortcodes/ux_image.php';
 require get_template_directory() . '/inc/shortcodes/ux_image_box.php';
+require get_template_directory() . '/inc/shortcodes/ux_menu_link.php';
+require get_template_directory() . '/inc/shortcodes/ux_menu_title.php';
+require get_template_directory() . '/inc/shortcodes/ux_menu.php';
 require get_template_directory() . '/inc/shortcodes/price_table.php';
 require get_template_directory() . '/inc/shortcodes/scroll_to.php';
 require get_template_directory() . '/inc/shortcodes/ux_pages.php';
@@ -124,7 +139,12 @@ if (is_woocommerce_activated()) {
   require get_template_directory() . '/inc/shortcodes/custom-product.php';
 }
 
-
+/**
+ * Flatsome Blocks
+ */
+if ( function_exists( 'register_block_type' ) ) {
+  require get_template_directory() . '/inc/blocks/uxbuilder/index.php';
+}
 
 /**
  * Load WooCommerce Custom Fields
@@ -138,6 +158,7 @@ if (is_woocommerce_activated()) {
  * Load WooCommerce functions
  */
 if ( is_woocommerce_activated() ) {
+  require get_template_directory() . '/inc/woocommerce/structure-wc-conditionals.php';
   require get_template_directory() . '/inc/woocommerce/structure-wc-global.php';
   require get_template_directory() . '/inc/woocommerce/structure-wc-category-page.php';
   require get_template_directory() . '/inc/woocommerce/structure-wc-category-page-header.php';

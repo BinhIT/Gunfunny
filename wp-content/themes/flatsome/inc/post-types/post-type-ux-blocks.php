@@ -130,9 +130,11 @@ function block_shortcode( $atts, $content = null ) {
 
 	if ( is_home() ) $post = get_post( get_option('page_for_posts') );
 
-	if ( $post_id = flatsome_get_block_id( $id ) ) {
-		$the_post = get_post( $post_id, OBJECT, 'display' );
-		$html     = isset( $the_post ) ? $the_post->post_content : '';
+	$post_id  = flatsome_get_block_id( $id );
+	$the_post = $post_id ? get_post( $post_id, OBJECT, 'display' ) : null;
+
+	if ( $the_post ) {
+		$html = $the_post->post_content;
 
 		if ( empty( $html ) ) {
 			$html = '<p class="lead shortcode-error">Open this in UX Builder to add and edit content</p>';
@@ -142,7 +144,8 @@ function block_shortcode( $atts, $content = null ) {
 		if ( isset( $post ) && current_user_can( 'edit_pages' )
 		     && ! is_customize_preview()
 		     && function_exists( 'ux_builder_is_active' )
-		     && ! ux_builder_is_active() ) {
+		     && ! ux_builder_is_active()
+			 && apply_filters( 'flatsome_show_block_edit_tooltip', true ) ) {
 			$edit_link         = ux_builder_edit_url( $post->ID, $post_id );
 			$edit_link_backend = admin_url( 'post.php?post=' . $post_id . '&action=edit' );
 			$html              = '<div class="block-edit-link" data-title="Edit Block: ' . get_the_title( $post_id ) . '"   data-backend="' . esc_url( $edit_link_backend )

@@ -203,7 +203,7 @@ function flatsome_page_header_shortcode($atts) {
           'property' => 'background-color',
         ),
         'bg_color' => array(
-          'selector' => '',
+          'selector' => $style === 'featured' || $style === 'normal' ? '.' . $style . '-title' : '',
           'property' => 'background-color',
         ),
         'bg_pos' => array(

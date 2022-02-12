@@ -22,7 +22,7 @@
 				<?php while ( have_posts() ) : the_post(); ?>
 
 					<div class="cart-header text-left medium-text-center">
-						<?php get_template_part( 'template-parts/header/partials/element', 'logo' ); ?>
+						<div id="logo" class="logo"><?php get_template_part( 'template-parts/header/partials/element', 'logo' ); ?></div>
 						<?php wc_get_template( 'checkout/header-small.php' ); ?>
 					</div>
 					<?php wc_print_notices(); ?>

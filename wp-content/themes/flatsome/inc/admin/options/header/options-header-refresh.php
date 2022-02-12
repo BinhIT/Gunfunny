@@ -78,14 +78,21 @@ function flatsome_refresh_header_partials( WP_Customize_Manager $wp_customize ) 
 	    },
 	) );
 
-	$wp_customize->selective_refresh->add_partial( 'mobile-sidebar', array(
-	    'selector' => '.mobile-sidebar .nav',
-	    'settings' => array('mobile_sidebar'),
-	    'render_callback' => function() {
-	        flatsome_header_elements('mobile_sidebar','sidebar');
-	    },
+	$wp_customize->selective_refresh->add_partial( 'mobile-sidebar-tab-1', array(
+		'selector'        => '.mobile-sidebar .nav[data-tab="1"]',
+		'settings'        => array( 'mobile_sidebar' ),
+		'render_callback' => function () {
+			flatsome_header_elements( 'mobile_sidebar', 'sidebar' );
+		},
 	) );
 
+	$wp_customize->selective_refresh->add_partial( 'mobile-sidebar-tab-2', array(
+		'selector'        => '.mobile-sidebar .nav[data-tab="2"]',
+		'settings'        => array( 'mobile_sidebar_tab_2' ),
+		'render_callback' => function () {
+			flatsome_header_elements( 'mobile_sidebar_tab_2', 'sidebar' );
+		},
+	) );
 
 	// Mobile Elements
 	$wp_customize->selective_refresh->add_partial( 'header_mobile_elements_left', array(

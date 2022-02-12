@@ -3,16 +3,18 @@
  * WP SEO integration
  *
  * @author      UX Themes
- * @package     Flatsome/Integrations
+ * @package     Flatsome\Integrations
  * @since       3.7.0
  */
 
-namespace Flatsome\Inc\Integrations;
+namespace Flatsome\Integrations;
+
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Class WP_Seo
  *
- * @package Flatsome\Inc\Integrations
+ * @package Flatsome\Integrations
  */
 class WP_Seo {
 
@@ -47,14 +49,13 @@ class WP_Seo {
 			add_action( 'flatsome_breadcrumb', [ $this, 'yoast_breadcrumb' ], 20, 2 );
 
 			// Manipulate last crumb.
-			if ( get_theme_mod( 'wpseo_breadcrumb_remove_last', 1 ) && apply_filters( 'flatsome_wpseo_breadcrumb_remove_last', is_product() ) ) {
+			if ( is_woocommerce_activated() && get_theme_mod( 'wpseo_breadcrumb_remove_last', 1 ) && apply_filters( 'flatsome_wpseo_breadcrumb_remove_last', is_product() ) ) {
 				add_filter( 'wpseo_breadcrumb_links', [ $this, 'remove_last_crumb' ] );
 				add_filter( 'wpseo_breadcrumb_single_link', [ $this, 'add_link_to_last_crumb' ], 10, 2 );
 			}
 
 			add_filter( 'wpseo_breadcrumb_separator', [ $this, 'wrap_crumb_separator' ] );
 		}
-
 	}
 
 	/**
@@ -98,7 +99,6 @@ class WP_Seo {
 
 	/**
 	 * Yoast breadcrumbs.
-	 * TODO: See if we want to add the before and after hooks.
 	 *
 	 * @param string|array $class   One or more classes to add to the class list.
 	 * @param bool         $display Whether to display the breadcrumb (true) or return it (false).
@@ -112,9 +112,7 @@ class WP_Seo {
 			$classes   = array_unique( array_filter( $classes ) );
 			$classes   = implode( ' ', $classes );
 
-			// do_action( 'flatsome_before_breadcrumb' );
 			yoast_breadcrumb( '<nav id="breadcrumbs" class="' . esc_attr( $classes ) . '">', '</nav>', $display );
-			// do_action( 'flatsome_after_breadcrumb' );
 		}
 	}
 

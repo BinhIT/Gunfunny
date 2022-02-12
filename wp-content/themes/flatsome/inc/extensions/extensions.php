@@ -1,5 +1,7 @@
 <?php
 
+global $extensions_url;
+global $extensions_uri;
 $extensions_url = get_template_directory() . '/inc/extensions';
 $extensions_uri = get_template_directory_uri() . '/inc/extensions';
 
@@ -30,5 +32,9 @@ if(is_woocommerce_activated()){
 	}
 	if ( get_theme_mod( 'cart_auto_refresh' ) ) {
 		require $extensions_url . '/flatsome-cart-refresh/flatsome-cart-refresh.php';
+	}
+
+	if ( get_theme_mod( 'swatches' ) ) {
+		require $extensions_url . '/flatsome-swatches/index.php';
 	}
 }

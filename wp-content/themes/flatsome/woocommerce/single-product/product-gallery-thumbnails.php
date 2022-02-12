@@ -3,10 +3,13 @@
 global $post, $product;
 
 $attachment_ids = $product->get_gallery_image_ids();
-$thumb_count    = count( $attachment_ids ) + 1;
+$post_thumbnail = has_post_thumbnail();
+$thumb_count    = count( $attachment_ids );
+
+if ( $post_thumbnail ) $thumb_count++;
 
 // Disable thumbnails if there is only one extra image.
-if ( $thumb_count == 1 ) {
+if ( $post_thumbnail && $thumb_count == 1 ) {
 	return;
 }
 
@@ -20,21 +23,18 @@ if ( is_rtl() ) {
 
 if ( $attachment_ids ) {
 	$loop          = 0;
-	$columns       = apply_filters( 'woocommerce_product_thumbnails_columns', 4 );
 	$image_size    = 'thumbnail';
 	$gallery_class = array( 'product-thumbnails', 'thumbnails' );
 
 	// Check if custom gallery thumbnail size is set and use that.
-	if ( fl_woocommerce_version_check( '3.3.3' ) ) {
-		$image_check = wc_get_image_size( 'gallery_thumbnail' );
-		if ( $image_check['width'] !== 100 ) {
-			$image_size = 'gallery_thumbnail';
-		}
+	$image_check = wc_get_image_size( 'gallery_thumbnail' );
+	if ( $image_check['width'] !== 100 ) {
+		$image_size = 'gallery_thumbnail';
 	}
 
 	$gallery_thumbnail = wc_get_image_size( apply_filters( 'woocommerce_gallery_thumbnail_size', 'woocommerce_' . $image_size ) );
 
-	if ( $thumb_count <= 5 ) {
+	if ( $thumb_count < 5 ) {
 		$gallery_class[] = 'slider-no-arrows';
 	}
 
@@ -56,7 +56,7 @@ if ( $attachment_ids ) {
 		<?php
 
 
-		if ( has_post_thumbnail() ) :
+		if ( $post_thumbnail ) :
 			?>
 			<div class="col is-nav-selected first">
 				<a>
@@ -69,8 +69,7 @@ if ( $attachment_ids ) {
 					echo $image;
 					?>
 				</a>
-			</div>
-			<?php
+			</div><?php
 		endif;
 
 		foreach ( $attachment_ids as $attachment_id ) {
@@ -78,8 +77,13 @@ if ( $attachment_ids ) {
 			$classes     = array( '' );
 			$image_class = esc_attr( implode( ' ', $classes ) );
 			$image       = wp_get_attachment_image_src( $attachment_id, apply_filters( 'woocommerce_gallery_thumbnail_size', 'woocommerce_' . $image_size ) );
-			$image_alt   = get_post_meta( $attachment_id, '_wp_attachment_image_alt', true );
-			$image       = '<img src="' . $image[0] . '" alt="' . $image_alt . '" width="' . $gallery_thumbnail['width'] . '" height="' . $gallery_thumbnail['height'] . '"  class="attachment-woocommerce_thumbnail" />';
+
+			if ( empty( $image ) ) {
+				continue;
+			}
+
+			$image_alt = get_post_meta( $attachment_id, '_wp_attachment_image_alt', true );
+			$image     = '<img src="' . $image[0] . '" alt="' . $image_alt . '" width="' . $gallery_thumbnail['width'] . '" height="' . $gallery_thumbnail['height'] . '"  class="attachment-woocommerce_thumbnail" />';
 
 			echo apply_filters( 'woocommerce_single_product_image_thumbnail_html', sprintf( '<div class="col"><a>%s</a></div>', $image ), $attachment_id, $post->ID, $image_class );
 

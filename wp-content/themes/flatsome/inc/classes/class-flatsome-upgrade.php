@@ -56,6 +56,9 @@ class Flatsome_Upgrade {
 		'3.12.1' => array(
 			'update_3121',
 		),
+		'3.15.0' => array(
+			'update_3150',
+		),
 	);
 
 	/**
@@ -198,6 +201,22 @@ class Flatsome_Upgrade {
 		// Set mod to empty string if value is 0.
 		if ( 0 == get_theme_mod( 'site_loader' ) ) {
 			set_theme_mod( 'site_loader', '' );
+		}
+	}
+
+	/**
+	 * Performs upgrades to Flatsome 3.15.0
+	 */
+	private function update_3150() {
+		foreach ( array( 'site_logo', 'site_logo_dark', 'site_logo_sticky' ) as $name ) {
+			$value = get_theme_mod( $name );
+
+			if ( empty( $value ) ) continue;
+			if ( is_numeric( $value ) ) continue;
+
+			if ( $post_id = attachment_url_to_postid( $value ) ) {
+				set_theme_mod( $name, $post_id );
+			}
 		}
 	}
 

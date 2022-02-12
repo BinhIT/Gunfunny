@@ -1,7 +1,7 @@
 <?php
 
 // Flatsome Products
-function ux_products($atts, $content = null, $tag) {
+function ux_products($atts, $content = null, $tag = '' ) {
 	$sliderrandomid = rand();
 
   if ( ! is_array( $atts ) ) {
@@ -201,28 +201,29 @@ function ux_products($atts, $content = null, $tag) {
   	}
 
 	// Repeater styles
-	$repater['id'] = $_id;
-	$repater['title'] = $title;
-	$repater['tag'] = $tag;
-	$repater['class'] = implode( ' ', $classes_repeater );
-	$repater['visibility'] = $visibility;
-	$repater['type'] = $type;
-	$repater['style'] = $style;
-	$repater['slider_style'] = $slider_nav_style;
-	$repater['slider_nav_color'] = $slider_nav_color;
-	$repater['slider_nav_position'] = $slider_nav_position;
-	$repater['slider_bullets'] = $slider_bullets;
-  	$repater['auto_slide'] = $auto_slide;
-	$repater['row_spacing'] = $col_spacing;
-	$repater['row_width'] = $width;
-	$repater['columns'] = $columns;
-	$repater['columns__md'] = $columns__md;
-	$repater['columns__sm'] = $columns__sm;
-	$repater['filter'] = $filter;
-	$repater['depth'] = $depth;
-	$repater['depth_hover'] = $depth_hover;
+	$repeater['id'] = $_id;
+	$repeater['title'] = $title;
+	$repeater['tag'] = $tag;
+	$repeater['class'] = implode( ' ', $classes_repeater );
+	$repeater['visibility'] = $visibility;
+	$repeater['type'] = $type;
+	$repeater['style'] = $style;
+	$repeater['slider_style'] = $slider_nav_style;
+	$repeater['slider_nav_color'] = $slider_nav_color;
+	$repeater['slider_nav_position'] = $slider_nav_position;
+	$repeater['slider_bullets'] = $slider_bullets;
+  	$repeater['auto_slide'] = $auto_slide;
+	$repeater['infinitive'] = $infinitive;
+	$repeater['row_spacing'] = $col_spacing;
+	$repeater['row_width'] = $width;
+	$repeater['columns'] = $columns;
+	$repeater['columns__md'] = $columns__md;
+	$repeater['columns__sm'] = $columns__sm;
+	$repeater['filter'] = $filter;
+	$repeater['depth'] = $depth;
+	$repeater['depth_hover'] = $depth_hover;
 
-	get_flatsome_repeater_start($repater);
+	get_flatsome_repeater_start($repeater);
 
 	?>
 	<?php
@@ -255,15 +256,17 @@ function ux_products($atts, $content = null, $tag) {
 
 	    if ( $products->have_posts() ) : ?>
 
-	     <?php while ( $products->have_posts() ) : $products->the_post(); ?>
-
-					<?php
+	     <?php while ( $products->have_posts() ) : $products->the_post();
           global $product;
 
           if($style == 'default'){
 					 	 wc_get_template_part( 'content', 'product' );
-					} else { ?>
-	            	<?php
+					} else {
+
+			  // Ensure visibility.
+			  if ( empty( $product ) || false === wc_get_loop_product_visibility( $product->get_id() ) || ! $product->is_visible() ) {
+				  continue;
+			  }
 
 	            	$classes_col = array('col');
 
@@ -281,15 +284,13 @@ function ux_products($atts, $content = null, $tag) {
 				        // Set image size
 				        if($grid[$current]['size']) $image_size = $grid[$current]['size'];
 				    }
-	            	?>
-
-	            	<div class="<?php echo implode(' ', $classes_col); ?>" <?php echo $animate;?>>
+	            	?><div class="<?php echo implode(' ', $classes_col); ?>" <?php echo $animate;?>>
 						<div class="col-inner">
 						<?php woocommerce_show_product_loop_sale_flash(); ?>
 						<div class="product-small <?php echo implode(' ', $classes_box); ?>">
 							<div class="box-image" <?php echo get_shortcode_inline_css($css_args_img); ?>>
 								<div class="<?php echo implode(' ', $classes_image); ?>" <?php echo get_shortcode_inline_css($css_image_height); ?>>
-									<a href="<?php echo get_the_permalink(); ?>">
+									<a href="<?php echo get_the_permalink(); ?>" aria-label="<?php echo esc_attr( $product->get_title() ); ?>">
 										<?php
 											if($back_image) flatsome_woocommerce_get_alt_product_thumbnail($image_size);
 											echo woocommerce_get_product_thumbnail($image_size);
@@ -333,15 +334,12 @@ function ux_products($atts, $content = null, $tag) {
 							</div>
 						</div>
 						</div>
-					</div>
-					<?php } ?>
-	            <?php endwhile; // end of the loop. ?>
-	        <?php
-
+					</div><?php }
+					endwhile; // end of the loop.
 	        endif;
 	        wp_reset_query();
 
-	get_flatsome_repeater_end($repater);
+	get_flatsome_repeater_end($repeater);
 	flatsome_box_item_toggle_end( $items );
 
 	$content = ob_get_contents();

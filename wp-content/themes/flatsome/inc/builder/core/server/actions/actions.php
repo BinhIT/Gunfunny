@@ -1,6 +1,32 @@
 <?php
 
 /**
+ * Register post type for custom templates.
+ */
+function ux_builder_register_post_types() {
+	register_post_type( 'ux_template', array(
+		'labels'             => array(
+			'name' => __( 'UX Templates', 'flatsome' ),
+		),
+		'description'        => '',
+		'public'             => false,
+		'publicly_queryable' => false,
+		'show_ui'            => false,
+		'show_in_menu'       => false,
+		'query_var'          => true,
+		'rewrite'            => false,
+		'capability_type'    => 'page',
+		'has_archive'        => false,
+		'hierarchical'       => false,
+		'menu_position'      => null,
+		'menu_icon'          => false,
+		'supports'           => array( 'title', 'editor', 'author', 'thumbnail' ),
+		'taxonomies'         => array(),
+	) );
+}
+add_action( 'init', 'ux_builder_register_post_types' );
+
+/**
  * Register breakpoints.
  */
 function ux_builder_register_breakpoints() {
@@ -61,8 +87,9 @@ function ux_builder_admin_bar_link() {
 
 	// Add link for editing custom product layout block.
 	if ( $is_woocommerce && is_product() && array_key_exists( 'blocks', $post_types ) ) {
-		$block = flatsome_product_block( $post->ID );
-		if ( $block ) {
+		$block    = flatsome_product_block( $post->ID );
+		$the_post = $block ? get_post( $block['id'] ) : null;
+		if ( $the_post ) {
 			$wp_admin_bar->add_menu( array(
 				'parent' => 'edit',
 				'id'     => 'edit_uxbuilder_product_layout',
@@ -199,7 +226,8 @@ function ux_builder_rest_api_wrap_html_blocks( $response, $post, $request ) {
   if (
     $context === 'edit' &&
     function_exists( 'use_block_editor_for_post' ) &&
-    use_block_editor_for_post( $post )
+    use_block_editor_for_post( $post ) &&
+    isset( $response->data['content']['raw'] )
   ) {
     $content = $response->data['content']['raw'];
 
