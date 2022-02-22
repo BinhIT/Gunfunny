@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="http://localhost/gunfunny-web/OwlCarousel/dist/assets/owl.carousel.min.css">
 <link rel="stylesheet" href="http://localhost/gunfunny-web/OwlCarousel/dist/assets/owl.theme.default.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
 	<?php wp_head(); ?>
 </head>
 
