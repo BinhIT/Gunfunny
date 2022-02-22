@@ -1,0 +1,8 @@
+wp-config.php
+/wp-content/themes/twenty*/
+# htaccess
+/.htaccess
+# Log files
+*.log
+# ERRORLog files
+*.errlogd
