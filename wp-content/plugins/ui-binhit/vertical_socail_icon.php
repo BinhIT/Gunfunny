@@ -10,35 +10,35 @@ function ItemsMedia() {
     <ul class='social'>
         <li>
             <a class="fa fa-facebook" href="#">
-                <img src="http://localhost/gunfunny-web/wp-content/uploads/2022/02/tele-1.png" alt="">
+                <img src="http://gunfunny.io/wp-content/uploads/2022/02/tele-1.png" alt="">
             </a>
         </li>
 
         <li>
             <a class="fa fa-twitter" href="#">
-                <img src="http://localhost/gunfunny-web/wp-content/uploads/2022/02/tele-1-1.png" alt="">
+                <img src="http://gunfunny.io/wp-content/uploads/2022/02/tele-1-1.png" alt="">
             </a>
         </li>
 
         <li>
             <a class="fa fa-dribbble" href="#">
-                <img src="http://localhost/gunfunny-web/wp-content/uploads/2022/02/tele-1-2.png" alt="">
+                <img src="http://gunfunny.io/wp-content/uploads/2022/02/tele-1-2.png" alt="">
             </a>
         </li>
 
         <li>
             <a class="fa fa-dribbble" href="#">
-                <img src="http://localhost/gunfunny-web/wp-content/uploads/2022/02/tele-1-4.png" alt="">
+                <img src="http://gunfunny.io/wp-content/uploads/2022/02/tele-1-4.png" alt="">
             </a>
         </li>
         <li>
             <a class="fa fa-dribbble" href="#">
-                <img src="http://localhost/gunfunny-web/wp-content/uploads/2022/02/tele-1-5.png" alt="">
+                <img src="http://gunfunny.io/wp-content/uploads/2022/02/tele-1-5.png" alt="">
             </a>
         </li>
         <li>
             <a class="fa fa-dribbble" href="#">
-                <img src="http://localhost/gunfunny-web/wp-content/uploads/2022/02/tele-1-6.png" alt="">
+                <img src="http://gunfunny.io/wp-content/uploads/2022/02/tele-1-6.png" alt="">
             </a>
         </li>
 
@@ -78,22 +78,25 @@ function ItemsMedia() {
     border-radius:25px;
 }
 
-/* .social li span:after {
-  content: '';
-  display: block;
-  width: 0;
-  height: 0;
-  position: absolute;
-  left: -20px;
-  top: 7px;
-  border: 10px solid transparent;
-  border-right: 10px solid #222;
+@media only screen and (max-width: 600px) {
+    .social_media_icon {
+    position: fixed;
+    top: 50% !important;
+    left: 89%;
 }
-.social li a:hover span {
-  visibility: visible;
-  opacity: 1;
-  transform: rotateY(0)
-} */
+#item_media ul {
+    list-style: none;
+    border: 4px solid rgba(16, 104, 255, 0.5);
+    border-radius: 25px;
+    width: 50px;
+    height: auto;
+    box-shadow: 0px 4px 10px 2px rgb(16 104 255 / 50%);
+}
+.social li a {
+
+    padding: 4px;
+}
+}
 </style>
 <?php
 }
