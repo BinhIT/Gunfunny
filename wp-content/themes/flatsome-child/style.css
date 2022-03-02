@@ -12,7 +12,6 @@ Version: 3.0
 @media only screen and (max-width: 48em) {
 /*************** ADD MOBILE ONLY CSS HERE  ***************/
 
-
 }
 /*HOME PAGE CSS */
 .citlce_playern img{
@@ -23,4 +22,41 @@ Version: 3.0
     display: none;
 }
 
+#msg-content{
+    margin: 0 auto;
+    padding-top: 4%;
+    padding-left: 5%;
+}
+#form-register .form-group label{
+color: #fff !important;
+}
+#form-register .form-group input{
+border-radius:10px;
+}
+.elementor-642{
+   background-image:url(http://localhost/gunfunny/wp-content/uploads/2022/03/BG-nen-2-02-1-1.png);
+   background-color: #cccccc; /* Used if the image is unavailable */
+   background-position: center; /* Center the image */
+   background-repeat: no-repeat; /* Do not repeat the image */
+   background-size: cover; /* Resize the background image to cover the entire container */ 
+}
+/* FORM LOGIN */
+#msg-container{
+    display: none;
+        border-radius: 18px;
+        width: 95%;
+        height: 100px;
+        background-color: #04AA6D;
+        color: #fff;
+}
+#container-form-login label{
+    color:#fff;
+}
+.elementor-714{
+    background-image:url(http://localhost/gunfunny/wp-content/uploads/2022/03/BG-nen-2-02-1-1.png);
+    background-color: #cccccc; /* Used if the image is unavailable */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */ 
+}
 /*END HOME PAGE CSS */

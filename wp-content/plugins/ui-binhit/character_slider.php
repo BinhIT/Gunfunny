@@ -9,13 +9,13 @@ function SliderCharacter() {
 	?>
       <section id="character_slider">
 <div class="owl-carousel">
-  <div id="item_img active"> <img src="http://localhost/gunfunny-web/wp-content/uploads/2022/02/character1.png" alt=""> </div>
-  <div id="item_img"> <img src="http://localhost/gunfunny-web/wp-content/uploads/2022/02/character2.png" alt=""> </div>
-  <div id="item_img"> <img src="http://localhost/gunfunny-web/wp-content/uploads/2022/02/character3.png" alt=""> </div>
-  <div id="item_img"> <img src="http://localhost/gunfunny-web/wp-content/uploads/2022/02/character4.png" alt=""> </div>
-  <div id="item_img"> <img src="http://localhost/gunfunny-web/wp-content/uploads/2022/02/character5.png" alt=""> </div>
-  <div id="item_img"> <img src="http://localhost/gunfunny-web/wp-content/uploads/2022/02/character6.png" alt=""> </div>
-  <div id="item_img"> <img src="http://localhost/gunfunny-web/wp-content/uploads/2022/02/toc-8.png" alt=""> </div>
+  <div id="item_img active"> <img src="https://gunfunny.io/wp-content/uploads/2022/02/character1.png" alt=""> </div>
+  <div id="item_img"> <img src="https://gunfunny.io/wp-content/uploads/2022/02/character2.png" alt=""> </div>
+  <div id="item_img"> <img src="https://gunfunny.io/wp-content/uploads/2022/02/character3.png" alt=""> </div>
+  <div id="item_img"> <img src="https://gunfunny.io/wp-content/uploads/2022/02/character4.png" alt=""> </div>
+  <div id="item_img"> <img src="https://gunfunny.io/wp-content/uploads/2022/02/character5.png" alt=""> </div>
+  <div id="item_img"> <img src="https://gunfunny.io/wp-content/uploads/2022/02/character6.png" alt=""> </div>
+  <div id="item_img"> <img src="https://gunfunny.io/wp-content/uploads/2022/02/toc-8.png" alt=""> </div>
 </div>
 <div class="thumnail">
 
